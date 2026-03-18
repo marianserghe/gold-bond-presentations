@@ -536,6 +536,28 @@
       align-items: center;
       justify-content: center;
     }
+
+    /* Mobile-friendly adjustments */
+    @media (max-width: 768px) {
+      .slide-content { padding: 40px 20px; }
+      .slide-image { max-width: 95vw; max-height: 70vh; }
+      .nav { bottom: 20px; padding: 8px 16px; gap: 12px; }
+      .nav-btn { font-size: 10px; }
+      .nav-counter { font-size: 8px; }
+      h1 { font-size: clamp(32px, 8vw, 48px) !important; }
+      h2 { font-size: clamp(24px, 5vw, 36px) !important; }
+      .stat-value { font-size: 32px !important; }
+      .stat-label { font-size: 8px !important; }
+      .prompt-content { padding: 24px 16px; }
+      .prompt-text { font-size: 16px !important; line-height: 1.5 !important; }
+      .palette { gap: 6px; }
+      .swatch { width: 32px !important; height: 32px !important; }
+    }
+    @media (max-width: 480px) {
+      .slide-content { padding: 30px 15px; }
+      .nav { padding: 6px 12px; gap: 8px; }
+      .prompt-text { font-size: 14px !important; }
+    }
   </style>
 </head>
 <body>
