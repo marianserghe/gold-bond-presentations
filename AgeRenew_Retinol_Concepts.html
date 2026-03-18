@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gold Bond Age Renew Retinol — Product Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black:    #0a0a0a;
+      --black2:   #111111;
+      --black3:   #181818;
+      --gold:     #c9a84c;
+      --gold-dim: rgba(201,168,76,0.15);
+      --gold-line:rgba(201,168,76,0.3);
+      --white:    #ffffff;
+      --grey1:    #e8e8e8;
+      --grey2:    #a0a0a0;
+      --grey3:    #555555;
+      --border:   rgba(255,255,255,0.07);
+      --teal:     #00A9B8;
+      --teal-dim: rgba(0,169,184,0.15);
+      --navy:     #0D1B4B;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #progress {
+      position: fixed;
+      top: 0; left: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.5s cubic-bezier(.4,0,.2,1);
+      z-index: 200;
+    }
+
+    .deck { width: 100vw; height: 100vh; position: relative; }
+
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: scale(1.02);
+    }
+    .slide.active {
+      opacity: 1; pointer-events: all; transform: scale(1);
+    }
+
+    .slide-content {
+      max-width: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 40px;
+    }
+
+    .slide-image {
+      max-width: 90vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .nav {
+      position: fixed;
+      bottom: 32px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; align-items: center; gap: 18px;
+      background: var(--black2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 10px 22px;
+      z-index: 100;
+    }
+    .nav-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px; font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--grey3);
+      padding: 4px;
+      transition: color 0.2s;
+    }
+    .nav-btn:hover { color: var(--gold); }
+    .nav-counter {
+      font-size: 11px; color: var(--grey3);
+      letter-spacing: 0.1em;
+      min-width: 40px; text-align: center;
+    }
+    .nav-counter span { color: var(--gold); }
+
+    .cm {
+      position: absolute;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey3);
+      font-weight: 400;
+    }
+    .cm.tl { top: 28px; left: 40px; }
+    .cm.tr { top: 28px; right: 40px; text-align: right; }
+
+    .intro-slide {
+      padding: 0 10vw;
+      justify-content: flex-start;
+    }
+
+    .intro-inner {
+      max-width: 900px;
+    }
+
+    .eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 22px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px; height: 1px;
+      background: var(--gold);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(48px, 6vw, 80px);
+      line-height: 1.08;
+      letter-spacing: -1px;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    h1 em { font-style: italic; color: var(--gold); }
+
+    .lead {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--grey1);
+      max-width: 620px;
+      margin-bottom: 36px;
+    }
+
+    .rule {
+      width: 56px; height: 1px;
+      background: var(--gold);
+      margin-bottom: 28px;
+    }
+
+    .stats { display: flex; gap: 0; margin-top: 32px; }
+    .stat {
+      padding: 0 36px 0 0;
+      border-right: 1px solid var(--border);
+      margin-right: 36px;
+    }
+    .stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .stat-n {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-l {
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey3);
+      margin-top: 6px;
+    }
+
+    /* Prompt slide layout - animated version */
+    .prompt-slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .prompt-header {
+      width: 100%;
+      max-width: 900px;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Center palette in step 1 */
+    .prompt-slide.step1 .palette {
+      justify-content: center;
+    }
+
+    /* Center info in step 1 */
+    .prompt-slide.step1 .prompt-info {
+      justify-content: center;
+    }
+
+    /* Step 1: Large centered (no image) */
+    .prompt-slide.step1 .prompt-header {
+      transform: scale(1.08);
+      margin-bottom: 0;
+    }
+
+    .prompt-slide.step1 .prompt-text {
+      font-size: 20px;
+      line-height: 1.8;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    .prompt-slide.step1 .swatch {
+      padding: 10px 18px;
+    }
+
+    .prompt-slide.step1 .swatch-color {
+      width: 28px;
+      height: 28px;
+    }
+
+    .prompt-slide.step1 .swatch-name {
+      font-size: 13px;
+    }
+
+    .prompt-slide.step1 .swatch-hex {
+      font-size: 11px;
+    }
+
+    /* Step 2: Compact with image */
+    .prompt-slide.step2 .prompt-header {
+      transform: scale(1);
+      margin-bottom: 20px;
+      align-self: flex-start;
+      align-items: flex-start;
+    }
+
+    .prompt-slide.step2 .prompt-text {
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 700px;
+      text-align: left;
+    }
+
+    .prompt-slide.step2 .swatch {
+      padding: 6px 12px;
+    }
+
+    .prompt-slide.step2 .swatch-color {
+      width: 20px;
+      height: 20px;
+    }
+
+    .prompt-slide.step2 .swatch-name {
+      font-size: 10px;
+    }
+
+    .prompt-slide.step2 .swatch-hex {
+      font-size: 9px;
+    }
+
+    .prompt-slide.step2 .palette {
+      justify-content: flex-start;
+    }
+
+    .prompt-slide.step2 .prompt-image-wrap {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      max-height: 70vh;
+    }
+
+    .prompt-image {
+      max-width: 85vw;
+      max-height: 65vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .prompt-text {
+      font-family: 'Jost', sans-serif;
+      line-height: 1.7;
+      color: var(--grey1);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .palette {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .swatch {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--black2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .swatch-color {
+      border-radius: 2px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .swatch-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .swatch-name {
+      color: var(--grey1);
+      font-weight: 400;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .swatch-hex {
+      color: var(--grey3);
+      font-family: 'Courier New', monospace;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .prompt-image-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    .prompt-slide.step2 .prompt-image-wrap {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      max-height: 70vh;
+    }
+
+    .prompt-image {
+      max-width: 85vw;
+      max-height: 65vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    /* Regular prompt slides (7, 8, 9) */
+    .prompt-slide-regular {
+      flex-direction: column;
+      padding: 80px 60px 60px;
+    }
+
+    .prompt-header-regular {
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 30px;
+    }
+
+    .prompt-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .prompt-text-regular {
+      font-family: 'Jost', sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--grey1);
+      max-width: 700px;
+      margin-bottom: 20px;
+    }
+
+    .palette-regular {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .swatch-regular {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--black2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 6px 12px;
+    }
+
+    .swatch-color-regular {
+      width: 20px;
+      height: 20px;
+      border-radius: 2px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .swatch-info-regular {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .swatch-name-regular {
+      font-size: 10px;
+      color: var(--grey1);
+      font-weight: 400;
+    }
+
+    .swatch-hex-regular {
+      font-size: 9px;
+      color: var(--grey3);
+      font-family: 'Courier New', monospace;
+    }
+
+    .prompt-info {
+      display: flex;
+      gap: 32px;
+      margin-top: 20px;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+    }
+
+    .prompt-slide.step1 .prompt-info {
+      justify-content: center;
+    }
+
+    .prompt-slide.step2 .prompt-info {
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    .prompt-info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .prompt-slide.step2 .prompt-info-item {
+      align-items: flex-start;
+    }
+
+    .prompt-info-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey3);
+    }
+
+    .prompt-info-value {
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      color: var(--grey1);
+    }
+
+    .prompt-info-regular {
+      display: flex;
+      gap: 32px;
+      margin-top: 16px;
+    }
+
+    .prompt-info-regular-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .prompt-info-regular-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey3);
+    }
+
+    .prompt-info-regular-value {
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      color: var(--grey1);
+    }
+
+    .prompt-image-wrap-regular {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      width: 100%;
+    }
+
+    .prompt-image-regular {
+      max-width: 75vw;
+      max-height: 65vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    /* Image slide - centered */
+    .image-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<div class="deck">
+
+  <!-- ═══ SLIDE 1 — INTRO ═══ -->
+  <div class="slide active intro-slide" data-slide="1">
+    <span class="cm tl">Gold Bond · Age Renew</span>
+    <span class="cm tr">Product Visuals</span>
+    <div class="intro-inner">
+      <div class="eyebrow">Anti-Aging Collection</div>
+      <h1 style="font-size: clamp(32px, 4vw, 56px);">Age Renew Retinol Overnight Body & Face Lotion</h1>
+      <div class="rule"></div>
+      <p class="lead">Product visuals for the Age Renew Retinol Overnight Body & Face Lotion — before/after packaging showcase for the anti-aging category.</p>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-n">9</div>
+          <div class="stat-l">Slides</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">1</div>
+          <div class="stat-l">Video</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">4</div>
+          <div class="stat-l">Prompts</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 2 — BEFORE ═══ -->
+  <div class="slide" data-slide="2">
+    <span class="cm tl">Current State</span>
+    <span class="cm tr">Before</span>
+    <div class="slide-content image-slide">
+      <img src="Retinol/before.webp" class="slide-image" alt="Before Retinol">
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 3 — AFTER WITH PROMPT (ANIMATED) ═══ -->
+  <div class="slide" data-slide="3">
+    <span class="cm tl">Design Direction</span>
+    <span class="cm tr">Concept A</span>
+    <div class="prompt-slide step1" id="promptSlide3">
+      <div class="prompt-header">
+        <p class="prompt-text">Replace the white tube with a deep midnight-navy matte tube. Gold foil stamping for the logo and 'Age Renew' wordmark. A crescent moon graphic wraps around the lower half in metallic gold. Cap remains gold-toned. Evokes luxury nighttime ritual.</p>
+        <div class="palette">
+          <div class="swatch">
+            <div class="swatch-color" style="background: #0D1B4B;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Midnight Navy</div>
+              <div class="swatch-hex">#0D1B4B</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #C9A84C;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">24K Gold</div>
+              <div class="swatch-hex">#C9A84C</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #7B9CCC;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Steel Blue</div>
+              <div class="swatch-hex">#7B9CCC</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #FFFFFF;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">White</div>
+              <div class="swatch-hex">#FFFFFF</div>
+            </div>
+          </div>
+        </div>
+        <div class="prompt-info">
+          <div class="prompt-info-item">
+            <div class="prompt-info-label">Target Audience</div>
+            <div class="prompt-info-value">Premium skincare shoppers, 35–55</div>
+          </div>
+          <div class="prompt-info-item">
+            <div class="prompt-info-label">Shelf Impact</div>
+            <div class="prompt-info-value">High – stands out in white-dominated aisle</div>
+          </div>
+        </div>
+      </div>
+      <div class="prompt-image-wrap">
+        <img src="Retinol/after.png" class="prompt-image" alt="After Retinol">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDES 4-5 — PRODUCT IMAGES ═══ -->
+  <div class="slide" data-slide="4">
+    <span class="cm tl">Product Visual</span>
+    <span class="cm tr">01</span>
+    <div class="slide-content image-slide">
+      <img src="Retinol/2.png" class="slide-image" alt="Gold Bond Retinol">
+    </div>
+  </div>
+
+  <div class="slide" data-slide="5">
+    <span class="cm tl">Product Visual</span>
+    <span class="cm tr">02</span>
+    <div class="slide-content image-slide">
+      <img src="Retinol/1.png" class="slide-image" alt="Gold Bond Retinol">
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 6 — VIDEO ═══ -->
+  <div class="slide" data-slide="6">
+    <span class="cm tl">Product Video</span>
+    <span class="cm tr">Loop</span>
+    <div class="slide-content image-slide">
+      <video id="video2" autoplay loop muted playsinline class="slide-image">
+        <source src="Retinol/grok-video-e9f55133-2ad1-4bef-9470-ca215c7ff78d-3.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 7 — PROMPT B (ANIMATED) ═══ -->
+  <div class="slide" data-slide="7">
+    <span class="cm tl">Design Direction</span>
+    <span class="cm tr">Concept B</span>
+    <div class="prompt-slide step1" id="promptSlide7">
+      <div class="prompt-header">
+        <p class="prompt-text">Transform the tube into a glass-look airless pump bottle with champagne gold hardware. A deep plum label with embossed constellation motif wraps around. The product name is laser-etched in gold. Boxed in a magnetic-close rigid carton lined with satin.</p>
+        <div class="palette">
+          <div class="swatch">
+            <div class="swatch-color" style="background: #4A1942;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Deep Plum</div>
+              <div class="swatch-hex">#4A1942</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #D4AF37;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Champagne Gold</div>
+              <div class="swatch-hex">#D4AF37</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #F5E6D0;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Ivory</div>
+              <div class="swatch-hex">#F5E6D0</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #1A1A1A;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Noir</div>
+              <div class="swatch-hex">#1A1A1A</div>
+            </div>
+          </div>
+        </div>
+        <div class="prompt-info">
+          <div class="prompt-info-item">
+            <div class="prompt-info-label">Target Audience</div>
+            <div class="prompt-info-value">Luxury beauty shoppers, 40–65</div>
+          </div>
+          <div class="prompt-info-item">
+            <div class="prompt-info-label">Shelf Impact</div>
+            <div class="prompt-info-value">Very High – repositions brand upmarket</div>
+          </div>
+        </div>
+      </div>
+      <div class="prompt-image-wrap">
+        <img src="Retinol/grok-image-22e3f8e8-8a0f-47c2-82e2-2c95edfa8723.png" class="prompt-image" alt="Gold Bond Retinol">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 8 — PROMPT C (ANIMATED) ═══ -->
+  <div class="slide" data-slide="8">
+    <span class="cm tl">Design Direction</span>
+    <span class="cm tr">Concept C</span>
+    <div class="prompt-slide step1" id="promptSlide8">
+      <div class="prompt-header">
+        <p class="prompt-text">A sleek, clinical white pump dispenser with a navy accent band listing clinical proof points. Think pharmaceutical precision: dosage markings on the pump, ingredient transparency window, and a QR code to clinical studies. Caps in steel grey.</p>
+        <div class="palette">
+          <div class="swatch">
+            <div class="swatch-color" style="background: #FFFFFF;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Clinical White</div>
+              <div class="swatch-hex">#FFFFFF</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #0A2A6E;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Navy</div>
+              <div class="swatch-hex">#0A2A6E</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #5B9BD5;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Sky Blue</div>
+              <div class="swatch-hex">#5B9BD5</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #4A4A4A;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Steel</div>
+              <div class="swatch-hex">#4A4A4A</div>
+            </div>
+          </div>
+        </div>
+        <div class="prompt-info">
+          <div class="prompt-info-item">
+            <div class="prompt-info-label">Target Audience</div>
+            <div class="prompt-info-value">Evidence-driven shoppers, 35–60</div>
+          </div>
+          <div class="prompt-info-item">
+            <div class="prompt-info-label">Shelf Impact</div>
+            <div class="prompt-info-value">Medium – blends in, but signals prestige</div>
+          </div>
+        </div>
+      </div>
+      <div class="prompt-image-wrap">
+        <img src="Retinol/grok-image-b4b665b6-f9e5-48a5-8f1b-f09262737f5a.png" class="prompt-image" alt="Gold Bond Retinol">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SLIDE 9 — PROMPT D (ANIMATED) ═══ -->
+  <div class="slide" data-slide="9">
+    <span class="cm tl">Design Direction</span>
+    <span class="cm tr">Concept D</span>
+    <div class="prompt-slide step1" id="promptSlide9">
+      <div class="prompt-header">
+        <p class="prompt-text">Switch to recycled kraft-paper-wrapped tube in warm terracotta and sage green. The logo is earthy brown on unbleached white. 'Made with 95% Recycled Materials' badge front and center. Cork-toned cap or PCR plastic in natural beige.</p>
+        <div class="palette">
+          <div class="swatch">
+            <div class="swatch-color" style="background: #C4714A;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Terracotta</div>
+              <div class="swatch-hex">#C4714A</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #6B8F71;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Sage Green</div>
+              <div class="swatch-hex">#6B8F71</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #F5E6C8;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Cream</div>
+              <div class="swatch-hex">#F5E6C8</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #3B2F2F;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Espresso</div>
+              <div class="swatch-hex">#3B2F2F</div>
+            </div>
+          </div>
+        </div>
+        <div class="prompt-info">
+          <div class="prompt-info-item">
+            <div class="prompt-info-label">Target Audience</div>
+            <div class="prompt-info-value">Eco-conscious shoppers, 25–50</div>
+          </div>
+          <div class="prompt-info-item">
+            <div class="prompt-info-label">Shelf Impact</div>
+            <div class="prompt-info-value">High – distinct from clinical/luxury competitors</div>
+          </div>
+        </div>
+      </div>
+      <div class="prompt-image-wrap">
+        <img src="Retinol/grok-image-6d947834-a4ee-4d8c-b576-aa21b5d51930.png" class="prompt-image" alt="Gold Bond Retinol">
+      </div>
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+<nav class="nav">
+  <button class="nav-btn" onclick="prev()">← prev</button>
+  <div class="nav-counter"><span id="cur">1</span>&nbsp;/&nbsp;9</div>
+  <button class="nav-btn" onclick="next()">next →</button>
+</nav>
+
+<script>
+  const TOTAL = 9;
+  let n = 1;
+  const slideSteps = { 3: 1, 7: 1, 8: 1, 9: 1 };
+
+  function show(i) {
+    i = Math.max(1, Math.min(TOTAL, i));
+    document.querySelector(`[data-slide="${n}"]`).classList.remove('active');
+    n = i;
+    document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+    document.getElementById('cur').textContent = n;
+    document.getElementById('progress').style.width = `${(n / TOTAL) * 100}%`;
+    
+    // Reset animated slides to step 1 when navigating to them
+    if (slideSteps.hasOwnProperty(n)) {
+      slideSteps[n] = 1;
+      const slide = document.getElementById(`promptSlide${n}`);
+      if (slide) {
+        slide.classList.remove('step2');
+        slide.classList.add('step1');
+      }
+    }
+  }
+
+  function next() {
+    // If on an animated slide step 1, animate to step 2 instead of advancing
+    if (slideSteps.hasOwnProperty(n) && slideSteps[n] === 1) {
+      slideSteps[n] = 2;
+      const slide = document.getElementById(`promptSlide${n}`);
+      if (slide) {
+        slide.classList.remove('step1');
+        slide.classList.add('step2');
+      }
+    } else {
+      show(n + 1);
+    }
+  }
+  
+  function prev() {
+    // If on an animated slide step 2, go back to step 1 instead of previous slide
+    if (slideSteps.hasOwnProperty(n) && slideSteps[n] === 2) {
+      slideSteps[n] = 1;
+      const slide = document.getElementById(`promptSlide${n}`);
+      if (slide) {
+        slide.classList.remove('step2');
+        slide.classList.add('step1');
+      }
+    } else {
+      show(n - 1);
+    }
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+  });
+
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; });
+  document.addEventListener('touchend', e => {
+    const d = e.changedTouches[0].screenX - tx;
+    if (Math.abs(d) > 50) d < 0 ? next() : prev();
+  });
+
+  document.getElementById('progress').style.width = `${(1 / TOTAL) * 100}%`;
+
+  // Slow down videos to 75% speed
+  document.querySelectorAll('video').forEach(v => {
+    v.playbackRate = 0.75;
+    v.addEventListener('playing', () => { v.playbackRate = 0.75; });
+  });
+</script>
+
+</body>
+</html>
