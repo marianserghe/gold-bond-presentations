@@ -541,31 +541,167 @@
 
     /* Mobile-friendly adjustments */
     @media (max-width: 768px) {
-      .slide-content { padding: 40px 20px; overflow-y: auto; }
-      .slide-image { max-width: 95vw; max-height: 70vh; }
-      .nav { bottom: 20px; padding: 8px 16px; gap: 12px; }
+      html, body { overflow-x: hidden; }
+      
+      /* Base slide adjustments */
+      .slide-content { 
+        padding: 50px 20px 80px 20px; 
+        overflow-y: auto; 
+        overflow-x: hidden;
+        min-height: 100vh;
+      }
+      .slide-image { 
+        max-width: 100%; 
+        max-height: 60vh; 
+      }
+      
+      /* Navigation */
+      .nav { bottom: 16px; padding: 8px 16px; gap: 12px; }
       .nav-btn { font-size: 10px; }
       .nav-counter { font-size: 8px; }
-      h1 { font-size: clamp(32px, 8vw, 48px) !important; }
-      h2 { font-size: clamp(24px, 5vw, 36px) !important; }
-      .stat-value { font-size: 32px !important; }
+      
+      /* Typography */
+      h1 { font-size: clamp(28px, 7vw, 42px) !important; line-height: 1.15; }
+      h2 { font-size: clamp(22px, 5vw, 32px) !important; line-height: 1.2; }
+      .stat-value { font-size: 28px !important; }
       .stat-label { font-size: 8px !important; }
-      .prompt-content { padding: 24px 16px; }
-      .prompt-text { font-size: 16px !important; line-height: 1.5 !important; }
-      .prompt-slide { padding: 40px 20px; }
-      .prompt-slide-regular { padding: 40px 20px; }
-      .prompt-header-regular { margin-bottom: 24px; }
-      .prompt-text-regular { margin-bottom: 20px; }
-      .palette { gap: 6px; }
-      .swatch { width: 32px !important; height: 32px !important; }
+      
+      /* Prompt slides - animated version */
+      .prompt-slide { 
+        padding: 50px 20px 80px 20px;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+      .prompt-slide.step1 .prompt-header {
+        transform: scale(1);
+        margin-bottom: 24px;
+      }
+      .prompt-slide.step1 .prompt-text {
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+        text-align: left;
+        max-width: 100%;
+      }
+      .prompt-slide.step1 .palette {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .prompt-slide.step1 .swatch {
+        padding: 8px 14px;
+      }
+      .prompt-slide.step1 .swatch-color {
+        width: 24px;
+        height: 24px;
+      }
+      .prompt-slide.step1 .swatch-name {
+        font-size: 11px;
+      }
+      .prompt-slide.step1 .swatch-hex {
+        font-size: 9px;
+      }
+      
+      /* Step 2 - compact with image */
+      .prompt-slide.step2 .prompt-header {
+        transform: scale(1);
+        margin-bottom: 20px;
+        max-width: 100%;
+        width: 100%;
+      }
+      .prompt-slide.step2 .prompt-text {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        max-width: 100%;
+        text-align: left;
+      }
+      .prompt-slide.step2 .palette {
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: flex-start;
+      }
+      .prompt-slide.step2 .swatch {
+        padding: 6px 10px;
+      }
+      .prompt-slide.step2 .swatch-color {
+        width: 18px;
+        height: 18px;
+      }
+      .prompt-slide.step2 .swatch-name {
+        font-size: 9px;
+      }
+      .prompt-slide.step2 .swatch-hex {
+        font-size: 8px;
+      }
+      .prompt-slide.step2 .prompt-image-wrap {
+        max-height: 50vh;
+        width: 100%;
+      }
+      .prompt-image {
+        max-width: 100%;
+        max-height: 50vh;
+      }
+      
+      /* Prompt info */
+      .prompt-info {
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 12px;
+      }
+      .prompt-info-item {
+        font-size: 10px !important;
+        padding: 4px 10px;
+      }
+      
+      /* Regular prompt slides (7, 8, 9) */
+      .prompt-slide-regular { 
+        padding: 50px 20px 80px 20px;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+      .prompt-header-regular { 
+        margin-bottom: 20px;
+        max-width: 100%;
+        width: 100%;
+      }
+      .prompt-text-regular { 
+        margin-bottom: 16px;
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        max-width: 100%;
+      }
+      .prompt-image-wrap-regular {
+        width: 100%;
+      }
+      .prompt-image-regular {
+        max-width: 100%;
+        max-height: 50vh;
+      }
+      .palette-regular {
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .swatch-regular {
+        padding: 6px 10px;
+      }
+      
+      /* Intro slide stats */
+      .stats {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
     }
+    
     @media (max-width: 480px) {
-      .slide-content { padding: 30px 15px; }
+      .slide-content { 
+        padding: 40px 16px 70px 16px; 
+      }
       .nav { padding: 6px 12px; gap: 8px; }
-      .prompt-text { font-size: 14px !important; }
-      .prompt-slide { padding: 30px 15px; }
-      .prompt-slide-regular { padding: 30px 15px; }
-      .prompt-header-regular { margin-bottom: 20px; }
+      h1 { font-size: 24px !important; }
+      .prompt-slide { padding: 40px 16px 70px 16px; }
+      .prompt-slide-regular { padding: 40px 16px 70px 16px; }
+      .prompt-slide.step2 .prompt-image-wrap,
+      .prompt-image {
+        max-height: 45vh;
+      }
     }
   </style>
 </head>
